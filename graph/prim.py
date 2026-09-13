@@ -100,8 +100,8 @@ while True:
 
         if item is None:
             pygame.display.update()
-            if len(visited_vertices) == VERTICES:
-                pygame.image.save(display, "out.jpg")
+            #if len(visited_vertices) == VERTICES:
+            #    pygame.image.save(display, "out.jpg")
             break
 
         new_vertex = item.v2 if item.v1 in visited_vertices else item.v1
