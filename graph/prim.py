@@ -1,8 +1,11 @@
 import pygame
+import os
 import time
 import heapq
 import random
 import math
+
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 pygame.init()
 
@@ -100,8 +103,6 @@ while True:
 
         if item is None:
             pygame.display.update()
-#            if len(visited_vertices) == VERTICES:
-#                pygame.image.save(display, "out.jpg")
             break
 
         new_vertex = item.v2 if item.v1 in visited_vertices else item.v1
@@ -111,5 +112,10 @@ while True:
         for edge in graph[new_vertex]:
             heapq.heappush(edge_heap, edge)
 
+        dir_name = "/dev/shm/bg/"
+        if not os.path.exists(dir_name):
+            os.mkdir(dir_name)
+        pygame.image.save(display, dir_name + "out.png")
+        os.system("/usr/bin/feh --no-fehbg --bg-tile '/dev/shm/bg/out.png' ")
         time.sleep(.1)
         pygame.display.update()
