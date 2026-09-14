@@ -84,12 +84,12 @@ while True:
                 quit()
 
         display.fill(black)
-        for vertex in graph:
-            vertex.draw_vertex(display)
         for edge in edge_list:
             edge.draw_edge(display, light_grey)
         for edge in mst:
             edge.draw_edge(display, white)
+        for vertex in graph:
+            vertex.draw_vertex(display)
 
         item = None
         while edge_heap:
@@ -100,8 +100,8 @@ while True:
 
         if item is None:
             pygame.display.update()
-            #if len(visited_vertices) == VERTICES:
-            #    pygame.image.save(display, "out.jpg")
+#            if len(visited_vertices) == VERTICES:
+#                pygame.image.save(display, "out.jpg")
             break
 
         new_vertex = item.v2 if item.v1 in visited_vertices else item.v1
