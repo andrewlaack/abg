@@ -8,21 +8,23 @@
 
 int main(void)
 {
+
     srand(time(0));
-    Vertex* vertices = gen_vertices(VERTICES);
-    Edge* edges = gen_edges(vertices, VERTICES, EDGES);
     InitWindow(5120, 1440, "Raylib background animation window");
 
     while (!WindowShouldClose())
     {
+        Vertex* vertices = gen_vertices(VERTICES);
+        Edge* edges = gen_edges(vertices, VERTICES, EDGES);
         BeginDrawing();
         ClearBackground(BLACK);
         draw_edges(edges,EDGES);
         draw_vertices(vertices,VERTICES);
         EndDrawing();
+        free(vertices);
+        free(edges);
     }
 
     CloseWindow();
-    free(vertices);
     return 0;
 }
