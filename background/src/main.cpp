@@ -1,5 +1,6 @@
 #include "../headers/graph.hpp"
 #include "../headers/prim.hpp"
+#include "../headers/background.hpp"
 #include <cstdlib>
 #include <unistd.h>
 #include <raylib.h>
@@ -8,11 +9,6 @@
 #include <unordered_set>
 #include <filesystem>
 
-void setBackground(std::string filePath) {
-    std::string command = "/usr/bin/feh --no-fehbg --bg-scale " + filePath;
-    const char* fp = command.c_str();
-    system(fp);
-}
 
 void customTakeScreenshot(char* filePath){
     const char *customParam;
