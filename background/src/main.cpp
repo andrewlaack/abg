@@ -2,6 +2,7 @@
 #include "../headers/prim.hpp"
 #include "../headers/background.hpp"
 #include <cstdlib>
+#include <iostream>
 #include <unistd.h>
 #include <raylib.h>
 #include <ctime>
@@ -19,6 +20,14 @@ void customTakeScreenshot(char* filePath){
 
 int main() {
 
+    int result = std::system("feh --version > /dev/null");
+
+    if (result != 0 ) {
+        std::cout << "Feh not found on $PATH, exiting." << std::endl;
+        return -1;
+    }
+
+    SetTraceLogLevel(LOG_ERROR);
     std::filesystem::create_directory("/dev/shm/bg");
     srand(clock());
 
