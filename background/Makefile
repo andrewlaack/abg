@@ -1,4 +1,2 @@
-clean:
-	rm a.out
 build:
-	g++ main.c draw.c vert.c edge.c util.c -lraylib
+	g++ main.cpp graph.cpp edge.cpp utils.cpp vertex.cpp -lraylib

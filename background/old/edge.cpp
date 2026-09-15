@@ -1,4 +1,4 @@
-#include "edge.h"
+#include "edge.hpp"
 #include "util.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,6 +11,7 @@ Edge gen_edge(int idx1, int idx2, Vertex* vertices) {
     Edge e;
     e.v1 = &vertices[idx1];
     e.v2 = &vertices[idx2];
+    e.weight = vert_dist(e.v1, e.v2);
     return e;
 }
 

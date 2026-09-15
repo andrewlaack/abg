@@ -1,4 +1,5 @@
 #include "vert.h"
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -23,4 +24,10 @@ Vertex* gen_vertices(int vtCount) {
     }
     return vertices;
 
+}
+
+float vert_dist(Vertex* v1, Vertex* v2) {
+    float dx = (float)v1->x - (float)v2->x;
+    float dy = (float)v1->y - (float)v2->y;
+    return sqrt(dx*dx + dy*dy);
 }

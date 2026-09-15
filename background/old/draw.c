@@ -1,6 +1,5 @@
 #include "raylib.h"
-#include "edge.h"
-#include <stdio.h>
+#include "edge.hpp"
 
 #define VERTEX_SIZE 5
 
@@ -18,14 +17,22 @@ void draw_edges(Edge* edges, int length) {
         Vector2 v2_p;
         v2_p.x = (float)v2.x;
         v2_p.y = (float)v2.y;
-        DrawLineEx(v1_p, v2_p, 1,DARKGRAY);
+        if(e.traversed == true) {
+            DrawLineEx(v1_p, v2_p, 1,WHITE);
+        } else {
+            DrawLineEx(v1_p, v2_p, 1,DARKGRAY);
+        }
     }
 }
 
 void draw_vertices(Vertex* vertices, int length) {
     for(int i = 0; i < length; ++i) {
         Vertex v = vertices[i];
-        DrawCircle(v.x,v.y,VERTEX_SIZE, WHITE);
+        if(v.visited) {
+            DrawCircle(v.x,v.y,VERTEX_SIZE, WHITE);
+        } else {
+            DrawCircle(v.x,v.y,VERTEX_SIZE, GRAY);
+        }
     }
 }
 
