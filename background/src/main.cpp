@@ -1,4 +1,4 @@
-#include "graph.hpp"
+#include "../headers/graph.hpp"
 #include <cstdlib>
 #include <unistd.h>
 #include <raylib.h>
@@ -6,7 +6,6 @@
 #include <queue>
 #include <unordered_set>
 #include <filesystem>
-
 
 void CustomTakeScreenshot(char* filePath){
     const char *customParam;

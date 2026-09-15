@@ -1,4 +1,4 @@
-#include "vertex.hpp"
+#include "../headers/vertex.hpp"
 #include <string>
 #include <raylib.h>
 

@@ -1,9 +1,8 @@
-#include "graph.hpp"
-#include "vertex.hpp"
-#include "utils.hpp"
+#include "../headers/graph.hpp"
+#include "../headers/vertex.hpp"
+#include "../headers/utils.hpp"
 #include <cstddef>
 #include <raylib.h>
-#include <iostream>
 
 Graph::Graph(std::size_t edgeCount, std::size_t vertCount, float xMax, float yMax) {
     for(std::size_t i = 0; i < vertCount; ++i) {
@@ -51,6 +50,7 @@ std::string Graph::toString() {
 
 
 void Graph::render() {
+    
     // yes, this will double draw because we track 0 -> 1 and 1 -> 0
     
     std::vector<Edge> visited {};

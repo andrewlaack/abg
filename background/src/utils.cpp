@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "../headers/utils.hpp"
 #include <cstdlib>
 
 float square(float x) {
