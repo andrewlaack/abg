@@ -31,9 +31,8 @@ int main() {
         g.traverseVertexIdx(0);
         visitedIndices.insert(0);
 
-
-
         while (!WindowShouldClose()) {
+            sleep(1);
 
             BeginDrawing();
             ClearBackground(BLACK);
