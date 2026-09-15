@@ -20,8 +20,8 @@ int main() {
     std::filesystem::create_directory("/dev/shm/bg");
     srand(clock());
 
-    std::size_t edgeCount = 20000;
-    std::size_t vertCount = 4000;
+    std::size_t edgeCount = 2000;
+    std::size_t vertCount = 100;
 
     uint32_t xMax = 5120;
     uint32_t yMax = 1440;
