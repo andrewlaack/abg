@@ -68,6 +68,10 @@ void Graph::render() {
             }
         }
     }
+    
+    for(auto vertex: this->vertices) {
+        vertex.render();
+    }
 
     // ensure we draw visited over unvisited for better looks
     for(auto edge: visited) {
@@ -76,10 +80,6 @@ void Graph::render() {
         auto v1 = vertices[idx1].position;
         auto v2 = vertices[idx2].position;
         DrawLineEx(v1, v2, 1, WHITE);
-    }
-
-    for(auto vertex: this->vertices) {
-        vertex.render();
     }
 }
 

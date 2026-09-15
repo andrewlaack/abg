@@ -1,20 +1,48 @@
 #include "graph.hpp"
+#include <cstdlib>
 #include <unistd.h>
 #include <raylib.h>
 #include <ctime>
 #include <queue>
 #include <unordered_set>
+#include <filesystem>
+
+
+void CustomTakeScreenshot(char* filePath){
+    const char *customParam;
+    Image screenshot = LoadImageFromScreen(); 
+    ExportImage(screenshot, TextFormat(filePath, customParam));
+    UnloadImage(screenshot); 
+}
+void explore(
+        std::size_t cIdx, 
+        std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>>& toVisit,
+        Edge& current,
+        Graph& g
+    ) {
+    g.traverseVertexIdx(cIdx);
+    std::vector<Edge> edges = g.getEdgesOfVertexIdx(cIdx);
+    for(auto edge: edges) {
+        toVisit.push(edge);
+    }
+    g.setEdgeTraversed(current);
+}
 
 int main() {
+
+    std::filesystem::create_directory("/dev/shm/bg");
     srand(clock());
 
-    std::size_t edgeCount = 2000;
-    std::size_t vertCount = 200;
+    std::size_t edgeCount = 1000;
+    std::size_t vertCount = 100;
 
     float xMax = 5120;
     float yMax = 1440;
     
 
+    
+
+    SetConfigFlags(FLAG_WINDOW_HIDDEN);
     InitWindow(xMax, yMax, "Raylib animation window");
 
     while (!WindowShouldClose()) {
@@ -32,12 +60,19 @@ int main() {
         visitedIndices.insert(0);
 
         while (!WindowShouldClose()) {
-            sleep(1);
+            sleep(5);
 
             BeginDrawing();
             ClearBackground(BLACK);
             g.render();
             EndDrawing(); 
+            
+            // this is very slow... also, why not just fucking paths?
+            char path[] = "/dev/shm/bg/out.png";
+            CustomTakeScreenshot(path);
+            // ye...
+            system("/usr/bin/feh --no-fehbg --bg-tile /dev/shm/bg/out.png");
+
 
             bool found = false;
             if(toVisit.size() == 0) {
@@ -55,24 +90,12 @@ int main() {
                 if(visitedIndices.find(current.v2Index) == visitedIndices.end()) {
                     auto cIdx = current.v2Index;
                     visitedIndices.insert(current.v2Index);
-                    g.traverseVertexIdx(cIdx);
-                    // TODO: Make this a function.
-                    std::vector<Edge> edges = g.getEdgesOfVertexIdx(cIdx);
-                    for(auto edge: edges) {
-                        toVisit.push(edge);
-                    }
-                g.setEdgeTraversed(current);
+                    explore(cIdx, toVisit, current, g);
 
                 } else if(visitedIndices.find(current.v1Index) == visitedIndices.end()) {
                     auto cIdx = current.v1Index;
                     visitedIndices.insert(current.v1Index);
-                    g.traverseVertexIdx(cIdx);
-                    // TODO: Make this a function.
-                    std::vector<Edge> edges = g.getEdgesOfVertexIdx(cIdx);
-                    for(auto edge: edges) {
-                        toVisit.push(edge);
-                    }
-                    g.setEdgeTraversed(current);
+                    explore(cIdx, toVisit, current, g);
                 } else {
                     found = false;
                 }
