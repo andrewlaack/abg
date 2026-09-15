@@ -34,8 +34,10 @@ int main() {
     std::size_t edgeCount = 2000;
     std::size_t vertCount = 100;
 
-    uint32_t xMax = 5120;
-    uint32_t yMax = 1440;
+    auto ss = getScreenSize();
+
+    uint32_t xMax = ss[0];
+    uint32_t yMax = ss[1];
 
     SetConfigFlags(FLAG_WINDOW_HIDDEN);
     InitWindow(xMax, yMax, "Raylib animation window");
