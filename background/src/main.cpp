@@ -8,7 +8,13 @@
 #include <unordered_set>
 #include <filesystem>
 
-void CustomTakeScreenshot(char* filePath){
+void setBackground(std::string filePath) {
+    std::string command = "/usr/bin/feh --no-fehbg --bg-scale " + filePath;
+    const char* fp = command.c_str();
+    system(fp);
+}
+
+void customTakeScreenshot(char* filePath){
     const char *customParam;
     Image screenshot = LoadImageFromScreen(); 
     ExportImage(screenshot, TextFormat(filePath, customParam));
@@ -52,9 +58,9 @@ int main() {
             
             // Basically all of the cost happens within these bounds
             char path[] = "/dev/shm/bg/out.bmp";
-            CustomTakeScreenshot(path);
+            customTakeScreenshot(path);
             // TODO: Can this be done away with? It's not *that* slow...
-            system("/usr/bin/feh --no-fehbg --bg-scale /dev/shm/bg/out.bmp");
+            setBackground(path);
             // Above here.
 
             oneStepPrim(toVisit, visitedIndices, g);
