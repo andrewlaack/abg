@@ -20,11 +20,11 @@ int main() {
     std::filesystem::create_directory("/dev/shm/bg");
     srand(clock());
 
-    std::size_t edgeCount = 30;
-    std::size_t vertCount = 10;
+    std::size_t edgeCount = 20000;
+    std::size_t vertCount = 4000;
 
-    float xMax = 5120;
-    float yMax = 1440;
+    uint32_t xMax = 5120;
+    uint32_t yMax = 1440;
 
     SetConfigFlags(FLAG_WINDOW_HIDDEN);
     InitWindow(xMax, yMax, "Raylib animation window");
@@ -44,17 +44,19 @@ int main() {
         visitedIndices.insert(0);
 
         while (!WindowShouldClose() && toVisit.size() != 0) {
-            sleep(5);
-
+            sleep(10);
             BeginDrawing();
             ClearBackground(BLACK);
             g.render();
             EndDrawing(); 
             
-            char path[] = "/dev/shm/bg/out.png";
+            // Basically all of the cost happens within these bounds
+            char path[] = "/dev/shm/bg/out.bmp";
             CustomTakeScreenshot(path);
             // TODO: Can this be done away with? It's not *that* slow...
-            system("/usr/bin/feh --no-fehbg --bg-tile /dev/shm/bg/out.png");
+            system("/usr/bin/feh --no-fehbg --bg-scale /dev/shm/bg/out.bmp");
+            // Above here.
+
             oneStepPrim(toVisit, visitedIndices, g);
 
         }

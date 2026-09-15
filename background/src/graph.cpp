@@ -18,7 +18,7 @@ Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax, uint32
 
     for(std::size_t i = 0; i < vertCount; ++i) {
         Vector2 rnd = randomPosition(xMax, yMax);
-        Vertex v {rnd,5};
+        Vertex v {rnd,2};
         this->vertices.push_back(v);
     }
     for(std::size_t i = 0; i < edgeCount; ++i) {
@@ -75,7 +75,7 @@ void Graph::render() {
             if(edge.traversed) {
                 visited.push_back(edge);
             } else {
-                DrawLineEx(v1, v2, 1,DARKERGRAY);
+                DrawLineEx(v1, v2, .2,DARKERGRAY);
             }
         }
     }
@@ -90,7 +90,7 @@ void Graph::render() {
         std::size_t idx2 = edge.v2Index;
         auto v1 = vertices[idx1].position;
         auto v2 = vertices[idx2].position;
-        DrawLineEx(v1, v2, 1, WHITE);
+        DrawLineEx(v1, v2, .2, WHITE);
     }
 }
 
