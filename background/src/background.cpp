@@ -1,4 +1,3 @@
-#include <csignal>
 #include <cstddef>
 #include <cstdint>
 #include <stdexcept>
