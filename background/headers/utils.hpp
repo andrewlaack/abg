@@ -1,9 +1,10 @@
 #pragma once
 
+#include <cstdint>
 #include <raylib.h>
 
 #define DARKERGRAY   CLITERAL(Color){ 40, 40, 40, 255 }
 
 float square(float x);
-Vector2 randomPosition(float xMax, float yMax);
+Vector2 randomPosition(uint32_t xMax, uint32_t yMax);
 float distanceSquared(Vector2 v1, Vector2 v2);

@@ -1,4 +1,5 @@
 #include "../headers/utils.hpp"
+#include <cstdint>
 #include <cstdlib>
 
 float square(float x) {
@@ -6,10 +7,10 @@ float square(float x) {
 }
 
 // call srand before invocation as this is a pure function.
-Vector2 randomPosition(float xMax, float yMax) {
-    float r1 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * xMax;
-    float r2 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * yMax;
-    Vector2 v {r1,r2};
+Vector2 randomPosition(uint32_t xMax, uint32_t yMax) {
+    uint32_t r1 = rand() % xMax;
+    uint32_t r2 = rand() % yMax;
+    Vector2 v {(float)r1,(float)r2};
     return v;
 }
 

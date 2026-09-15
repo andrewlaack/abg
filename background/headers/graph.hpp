@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -12,10 +14,12 @@ class Graph {
         std::vector<Vertex> vertices {};
     public:
         // based on the edgeCount and vertCount, random edges and vertices will be created.
-        Graph(std::size_t edgeCount, std::size_t vertCount, float xMax, float yMax);
+        Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax, uint32_t yMax);
         std::string toString();
         void render();
         void traverseVertexIdx(std::size_t idx);
         std::vector<Edge> getEdgesOfVertexIdx(std::size_t idx);
         void setEdgeTraversed(Edge e);
+        Vertex getVertex(std::size_t idx);
+        std::size_t getVertexCount();
 };

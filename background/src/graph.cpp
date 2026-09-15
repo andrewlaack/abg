@@ -2,9 +2,20 @@
 #include "../headers/vertex.hpp"
 #include "../headers/utils.hpp"
 #include <cstddef>
+#include <cstdint>
 #include <raylib.h>
+#include <stdexcept>
 
-Graph::Graph(std::size_t edgeCount, std::size_t vertCount, float xMax, float yMax) {
+Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax, uint32_t yMax) {
+
+    if(edgeCount > 0 && vertCount <= 1) {
+        throw std::invalid_argument("This graph does not support self-loops.");
+    }
+    if(xMax <= 0 || yMax <= 0) {
+        throw std::invalid_argument("xMax and yMax must be > 0.");
+    }
+
+
     for(std::size_t i = 0; i < vertCount; ++i) {
         Vector2 rnd = randomPosition(xMax, yMax);
         Vertex v {rnd,5};
@@ -19,7 +30,7 @@ Graph::Graph(std::size_t edgeCount, std::size_t vertCount, float xMax, float yMa
             idx2 = std::rand() % vertCount;
         }
         
-        Edge e {idx1, idx2, distanceSquared(vertices[idx1].position, vertices[idx2].position)};
+        Edge e {idx1, idx2, distanceSquared(vertices[idx1].position, vertices[idx2].position), i};
         this->edges[idx1].push_back(e);
         this->edges[idx2].push_back(e);
     }
@@ -116,4 +127,17 @@ void Graph::setEdgeTraversed(Edge e) {
         }
     }
 
+}
+
+Vertex Graph::getVertex(std::size_t idx) {
+    // idx can't be negative bc size_t
+    if(idx >= vertices.size()) {
+        throw std::invalid_argument("idx out of bounds for vertex list");
+    }
+    return vertices[idx];
+}
+
+
+std::size_t Graph::getVertexCount() {
+    return vertices.size();
 }
