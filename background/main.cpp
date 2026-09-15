@@ -33,14 +33,11 @@ int main() {
     std::filesystem::create_directory("/dev/shm/bg");
     srand(clock());
 
-    std::size_t edgeCount = 1000;
-    std::size_t vertCount = 100;
+    std::size_t edgeCount = 30;
+    std::size_t vertCount = 10;
 
     float xMax = 5120;
     float yMax = 1440;
-    
-
-    
 
     SetConfigFlags(FLAG_WINDOW_HIDDEN);
     InitWindow(xMax, yMax, "Raylib animation window");
@@ -67,10 +64,9 @@ int main() {
             g.render();
             EndDrawing(); 
             
-            // this is very slow... also, why not just fucking paths?
             char path[] = "/dev/shm/bg/out.png";
             CustomTakeScreenshot(path);
-            // ye...
+            // TODO: Can this be done away with? It's not *that* slow...
             system("/usr/bin/feh --no-fehbg --bg-tile /dev/shm/bg/out.png");
 
 
@@ -102,7 +98,7 @@ int main() {
 
             }
 
-    }
+        }
 
     }
 
