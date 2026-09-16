@@ -1,7 +1,7 @@
-#include "../headers/graph.hpp"
-#include "../headers/constants.hpp"
-#include "../headers/vertex.hpp"
-#include "../headers/utils.hpp"
+#include "../include/graph.hpp"
+#include "../include/constants.hpp"
+#include "../include/vertex.hpp"
+#include "../include/utils.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <raylib.h>

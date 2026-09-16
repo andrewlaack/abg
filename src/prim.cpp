@@ -1,5 +1,5 @@
-#include "../headers/graph.hpp"
-#include "../headers/prim.hpp"
+#include "../include/graph.hpp"
+#include "../include/prim.hpp"
 #include <cstdlib>
 #include <unistd.h>
 #include <raylib.h>

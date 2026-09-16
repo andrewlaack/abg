@@ -1,7 +1,7 @@
-#include "../headers/graph.hpp"
-#include "../headers/prim.hpp"
-#include "../headers/background.hpp"
-#include "../headers/constants.hpp"
+#include "../include/graph.hpp"
+#include "../include/prim.hpp"
+#include "../include/background.hpp"
+#include "../include/constants.hpp"
 #include "../vendor/argparse.hpp"
 #include <cstddef>
 #include <cstdint>

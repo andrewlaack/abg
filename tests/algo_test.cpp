@@ -1,4 +1,4 @@
-#include "../headers/prim.hpp"
+#include "../include/prim.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 #include <cstddef>

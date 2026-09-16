@@ -1,4 +1,4 @@
-#include "../headers/edge.hpp"
+#include "../include/edge.hpp"
 #include <cstddef>
 
 Edge::Edge(std::size_t v1, std::size_t v2, double length2, std::size_t identifier)

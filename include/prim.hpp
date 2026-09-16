@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <raylib.h>
 #include <queue>
-#include "../headers/graph.hpp"
+#include "../include/graph.hpp"
 #include <unordered_set>
 
 void explore(
