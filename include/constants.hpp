@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <raylib.h>
 
-const CLITERAL(Color) DARKERGRAY { 40, 40, 40, 255 };
+const CLITERAL(Color) DARKERGRAY{40, 40, 40, 255};
 
 const float VERTEX_RENDER_SIZE = 4;
 const float EDGE_REDNER_SIZE = 1;
