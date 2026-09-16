@@ -1,5 +1,6 @@
 #include "../headers/utils.hpp"
 #include <cstdint>
+#include <cassert>
 #include <cstdlib>
 
 float square(float x) {
@@ -17,5 +18,7 @@ Vector2 randomPosition(uint32_t xMax, uint32_t yMax) {
 float distanceSquared(Vector2 v1, Vector2 v2) {
     float xSquare = square(v1.x - v2.x);
     float ySquare = square(v1.y - v2.y);
-    return xSquare + ySquare;
+    float result = xSquare + ySquare;
+    assert(result >= 0);
+    return result;
 }

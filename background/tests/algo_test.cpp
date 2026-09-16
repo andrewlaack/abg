@@ -164,4 +164,3 @@ TEST_CASE( "Staircase Prim algorithm", "[Staircase prim algo]" ) {
     }
 }
 
-

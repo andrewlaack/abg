@@ -46,7 +46,7 @@ int main() {
             ClearBackground(BLACK);
             g.render();
             EndDrawing(); 
-            sleep(5);
+            sleep(1);
             oneStepPrim(toVisit, visitedIndices, g);
 
         }
