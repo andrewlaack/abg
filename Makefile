@@ -1,13 +1,19 @@
 include config.mk
 
 # building actual program
-build:
+
+
+debug-build:
+	${DCOMMAND_P} src/main.cpp ${DCOMMAND_S} -o abg.out
+
+
+release-build:
 	${COMMAND_P} src/main.cpp ${COMMAND_S} -o abg.out
 man:
 	mkdir -p ${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < abg.1 > ${DESTDIR}${MANPREFIX}/man1/abg.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/abg.1
-install: build man
+install: release-build man
 	cp abg.out /usr/local/bin/abg
 clean:
 	rm *.out
