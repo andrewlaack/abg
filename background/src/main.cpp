@@ -2,33 +2,15 @@
 #include "../headers/prim.hpp"
 #include "../headers/background.hpp"
 #include <cstdlib>
-#include <iostream>
 #include <unistd.h>
 #include <raylib.h>
 #include <ctime>
 #include <queue>
 #include <unordered_set>
-#include <filesystem>
-
-
-void customTakeScreenshot(char* filePath){
-    const char *customParam;
-    Image screenshot = LoadImageFromScreen(); 
-    ExportImage(screenshot, TextFormat(filePath, customParam));
-    UnloadImage(screenshot); 
-}
 
 int main() {
 
-    int result = std::system("feh --version > /dev/null");
-
-    if (result != 0 ) {
-        std::cout << "Feh not found on $PATH, exiting." << std::endl;
-        return -1;
-    }
-
     SetTraceLogLevel(LOG_ERROR);
-    std::filesystem::create_directory("/dev/shm/bg");
     srand(clock());
 
     std::size_t edgeCount = 2000;
@@ -39,8 +21,11 @@ int main() {
     uint32_t xMax = ss[0];
     uint32_t yMax = ss[1];
 
-    SetConfigFlags(FLAG_WINDOW_HIDDEN);
-    InitWindow(xMax, yMax, "Raylib animation window");
+    // would be nice to do this all in background.cpp, but raylib and x11 can't both be imported 
+    // by the same file because of some dependency chain thing with Font.
+
+    InitWindow(xMax, yMax, "background-ray");
+    sendToBg("background-ray");
 
     while (!WindowShouldClose()) {
 
@@ -57,19 +42,11 @@ int main() {
         visitedIndices.insert(0);
 
         while (!WindowShouldClose() && toVisit.size() != 0) {
-            sleep(10);
             BeginDrawing();
             ClearBackground(BLACK);
             g.render();
             EndDrawing(); 
-            
-            // Basically all of the cost happens within these bounds
-            char path[] = "/dev/shm/bg/out.bmp";
-            customTakeScreenshot(path);
-            // TODO: Can this be done away with? It's not *that* slow...
-            setBackground(path);
-            // Above here.
-
+            sleep(5);
             oneStepPrim(toVisit, visitedIndices, g);
 
         }

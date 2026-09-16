@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#include <unistd.h>
 
 void setBackground(std::string filePath) {
     std::string command = "/usr/bin/feh --no-fehbg --bg-scale " + filePath;
@@ -21,4 +23,44 @@ std::vector<uint32_t> getScreenSize() {
     screen = ScreenOfDisplay(dpy, 0);
     std::vector<uint32_t> res {(uint32_t)screen->width, (uint32_t)screen->height};
     return res;
+}
+
+void sendToBg(std::string name)
+{
+    Display* d = XOpenDisplay(nullptr);
+    Window root = DefaultRootWindow(d), r, p, *kids;
+    uint32_t n;
+
+    XQueryTree(d, root, &r, &p, &kids, &n);
+    for (unsigned i = 0; i < n; i++) {
+
+        char* wn = nullptr;
+        XFetchName(d, kids[i], &wn);
+
+        if (wn == nullptr) {
+            continue;
+        }
+
+        bool hit = name == wn;
+        XFree(wn);
+
+        if (!hit) {
+            continue;
+        }
+
+        XSetWindowAttributes a;
+
+        a.override_redirect = True;
+        XChangeWindowAttributes(d, kids[i], CWOverrideRedirect, &a);
+
+        // have to do unmap / map to make it bg for all tags
+        XUnmapWindow(d, kids[i]);
+        XMapWindow(d, kids[i]);
+
+        XLowerWindow(d, kids[i]);
+        break;
+    }
+
+    XFree(kids);
+    XCloseDisplay(d);
 }

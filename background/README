@@ -4,4 +4,4 @@ background
 
 dependencies
 ============
-X11, feh (on $PATH), raylib, g++
+X11, raylib, g++
