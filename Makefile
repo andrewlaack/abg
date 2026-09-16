@@ -8,8 +8,14 @@ install: build
 clean:
 	rm abg.out
 
+# other
+fmt:
+	clang-format -i src/*.cpp
+	clang-format -i tests/*.cpp
+format: fmt
+
 # snapshot update
-update-snapshot:
+snapshot-update:
 	${TCOMMAND_P} tests/snapshot_update.cpp ${TCOMMAND_S} -o snapshot_update
 	./snapshot_update
 	rm snapshot_update
@@ -28,4 +34,4 @@ algo-test:
 	./algo_tests
 	rm algo_tests
 
-test: snapshot-test graph-test algo-test
+test: format snapshot-test graph-test algo-test
