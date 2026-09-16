@@ -10,10 +10,8 @@ TEST_CASE("Graph traversal invariants", "[graph traversal]") {
   float xMax = 10;
   float yMax = 10;
   auto g = Graph(edgeCount, vertCount, xMax, yMax);
-  int count = 0;
   for (int i = 0; i < vertCount; ++i) {
     g.traverseVertexIdx(i);
-    count += 1;
   }
   for (int i = 0; i < vertCount; ++i) {
     REQUIRE(g.getVertex(i).visited);
@@ -23,7 +21,7 @@ TEST_CASE("Graph traversal invariants", "[graph traversal]") {
 
   try {
     g.getVertex(vertCount + 1);
-  } catch (std::invalid_argument e) {
+  } catch (std::invalid_argument& e) {
     error = true;
   }
 
@@ -43,7 +41,7 @@ TEST_CASE("Graph gracefully handles stupid fucking inputs",
 
   try {
     createGraph(vertCount, edgeCount);
-  } catch (std::invalid_argument e) {
+  } catch (std::invalid_argument& e) {
     error = true;
   }
   REQUIRE(!error);
@@ -54,7 +52,7 @@ TEST_CASE("Graph gracefully handles stupid fucking inputs",
   error = false;
   try {
     createGraph(vertCount, edgeCount);
-  } catch (std::invalid_argument e) {
+  } catch (std::invalid_argument& e) {
     error = true;
   }
 
@@ -111,8 +109,8 @@ TEST_CASE("Graph vertex and edge counts", "[graph counts]") {
 
   for (int i = 2; i < 100; ++i) {
     for (int x = 1; x < 10; ++x) {
-      int vertCount = i;
-      int edgeCount = x;
+      std::size_t vertCount = i;
+      std::size_t edgeCount = x;
       float xMax = 10;
       float yMax = 10;
 

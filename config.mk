@@ -12,8 +12,8 @@ TLIBS = -lCatch2Main -lCatch2 ${LIBS}
 # compiler
 CC = g++
 
-CFLAGS = -Ofast -pedantic -Wall -Wno-deprecated-declarations -Os 
-CTFLAGS = -O0 -pedantic -Wall -Wno-deprecated-declarations -Os
+CFLAGS = -Ofast -std=c++23 -Wpedantic -Wall -Werror -Wextra -Wno-deprecated-declarations -Os 
+CTFLAGS = -fsanitize=address,undefined -O0 -std=c++23 -Wpedantic -Wall -Werror -Wextra -Wno-deprecated-declarations -Os
 
 BASE_FILES = src/prim.cpp src/graph.cpp src/edge.cpp src/utils.cpp src/vertex.cpp src/background.cpp
 

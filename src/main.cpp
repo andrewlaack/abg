@@ -66,9 +66,7 @@ int main(int argc, char **argv) {
   InitWindow(xMax, yMax, "abg");
   sendToBg("abg");
 
-  int count = 0;
   while (!WindowShouldClose()) {
-    count += 1;
 
     Graph g = Graph(edgeCount, vertexCount, xMax, yMax);
     std::unordered_set<std::size_t> visitedIndices{};
