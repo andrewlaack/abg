@@ -7,21 +7,12 @@
 #include <iostream>
 #include <queue>
 #include <unordered_set>
-#include <chrono>
 
 #include "../include/background.hpp"
 #include "../include/constants.hpp"
 #include "../include/graph.hpp"
 #include "../include/prim.hpp"
 #include "../vendor/argparse.hpp"
-
- #ifdef NDEBUG
-    #define DLOG(statement) std::cout << statement << std::endl
-    #define DEBUG true
- #else
-    #define DLOG(statement) 
-    #define DEBUG false
- #endif
 
 int main(int argc, char** argv) {
     srand(clock());
@@ -93,7 +84,6 @@ int main(int argc, char** argv) {
 
     InitWindow(xMax, yMax, "abg");
 
-
     sendToBg("abg");
 
     while (!WindowShouldClose()) {
@@ -109,21 +99,10 @@ int main(int argc, char** argv) {
         visitedIndices.insert(0);
 
         while (!WindowShouldClose() && toVisit.size() != 0) {
-            if(DEBUG) {
-                auto start = std::chrono::system_clock::now();
-                BeginDrawing();
-                ClearBackground(BLACK);
-                g.render();
-                EndDrawing();
-                auto end = std::chrono::system_clock::now();
-                auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-                std::cout << "render time us: "<< elapsed.count() << std::endl;
-            } else {
-                BeginDrawing();
-                ClearBackground(BLACK);
-                g.render();
-                EndDrawing();
-            }
+            BeginDrawing();
+            ClearBackground(BLACK);
+            g.render();
+            EndDrawing();
 
             // since we wait sleepTime here, the bg render has a render delta of
             // at minimum sleepTime when switching tags in dwm, this is rather
@@ -134,19 +113,9 @@ int main(int argc, char** argv) {
             // (at least on my hardware) and so this tradeoff is accepted for
             // now, unless there's a simple approach that allows for preemption
 
-
             usleep((int)(sleepTime * 1000000));
 
-            if(DEBUG) {
-                auto start = std::chrono::system_clock::now();
-                oneStepPrim(toVisit, visitedIndices, g);
-                auto end = std::chrono::system_clock::now();
-                auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-                std::cout << "prim step us: "<< elapsed.count() << std::endl;
-            } else {
-                oneStepPrim(toVisit, visitedIndices, g);
-            }
-
+            oneStepPrim(toVisit, visitedIndices, g);
         }
     }
 }

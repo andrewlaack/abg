@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <stdexcept>
+#include <unordered_map>
 
 #include "../include/constants.hpp"
 #include "../include/utils.hpp"
@@ -66,6 +67,8 @@ std::string Graph::toString() noexcept {
 
 void Graph::render() noexcept {
     // yes, this will double draw because we track 0 -> 1 and 1 -> 0
+    // this is faster than tracking which have and haven't been rendered though
+    // with a to_string + unordered set.
 
     std::vector<Edge> visited{};
     for (auto pair : this->edges) {
