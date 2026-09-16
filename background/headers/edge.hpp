@@ -11,7 +11,7 @@ class Edge {
         std::size_t v2Index;
         float length2;
         bool traversed = false;
-        std::string toString();
+        std::string toString() const noexcept;
         bool operator<(const Edge& other) const;
         bool operator>(const Edge& other) const;
 };

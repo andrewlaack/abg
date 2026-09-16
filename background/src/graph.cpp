@@ -39,7 +39,7 @@ Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax, uint32
     }
 }
 
-std::string Graph::toString() {
+std::string Graph::toString() noexcept {
 
     std::string result = "edges: {";
 
@@ -63,7 +63,7 @@ std::string Graph::toString() {
 }
 
 
-void Graph::render() {
+void Graph::render() noexcept {
     
     // yes, this will double draw because we track 0 -> 1 and 1 -> 0
     
@@ -141,6 +141,6 @@ Vertex Graph::getVertex(std::size_t idx) {
 }
 
 
-std::size_t Graph::getVertexCount() {
+std::size_t Graph::getVertexCount() const noexcept {
     return vertices.size();
 }

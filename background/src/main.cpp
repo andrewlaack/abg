@@ -13,7 +13,7 @@ int main() {
     SetTraceLogLevel(LOG_ERROR);
     srand(clock());
 
-    std::size_t edgeCount = 2000;
+    std::size_t edgeCount = 500;
     std::size_t vertCount = 100;
 
     auto ss = getScreenSize();
