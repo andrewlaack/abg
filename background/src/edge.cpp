@@ -1,7 +1,7 @@
 #include "../headers/edge.hpp"
 #include <cstddef>
 
-Edge::Edge(std::size_t v1, std::size_t v2, float length2, std::size_t identifier)
+Edge::Edge(std::size_t v1, std::size_t v2, double length2, std::size_t identifier)
     : v1Index(v1), v2Index(v2), length2(length2), identifier(identifier) {}
 
 std::string Edge::toString() const noexcept {
