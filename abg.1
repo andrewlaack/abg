@@ -1,0 +1,37 @@
+.TH abg 1 abg\-VERSION
+.SH NAME
+abg \- animated background
+.SH SYNOPSIS
+.B abg [--help] [--version] [--vertices VAR] [--sleep VAR] [--edges VAR]
+.SH DESCRIPTION
+abg is a program that executes Prim's algorithm, rendering each step using raylib, set as an X11 background.
+.SH OPTIONS
+.TP
+.B -h, --help \n
+shows help message and exits 
+
+.TP
+.B  -v, --version
+prints version information and exits
+
+.TP
+.B  --vertices
+number of vertices in the graph [nargs=0..1] [default: 200]
+
+.TP
+.B  -s, --sleep 
+amount of time to sleep between traversals [nargs=0..1] [default: 1]
+
+.TP
+.B  -e, --edges
+number of edges in the graph [nargs=0..1] [default: 1000]
+
+prints version information to stderr, then exits.
+.SH EXAMPLES
+
+abg --vertices 10 --edges 20
+
+abg --vertices 300 --edges 2000 --sleep 3
+
+.SH BUGS
+Send all bug reports with a patch to andrew@laack.co.

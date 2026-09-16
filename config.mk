@@ -2,8 +2,7 @@ VERSION = 10.0.0
 
 # dirs
 PREFIX = /usr/local
-# TODO
-# MANPREFIX = ${PREFIX}/share/man
+MANPREFIX = ${PREFIX}/share/man
 
 # linking
 LIBS = -lraylib -lX11

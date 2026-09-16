@@ -10,12 +10,13 @@ X11, raylib, g++, make
 
 Usage
 =====
-    Usage: abg [--help] [--version] [--vertices VAR] [--edges VAR]
+    Usage: abg [--help] [--version] [--vertices VAR] [--sleep VAR] [--edges VAR]
 
     Optional arguments:
       -h, --help     shows help message and exits
       -v, --version  prints version information and exits
       --vertices     number of vertices in the graph [nargs=0..1] [default: 200]
+      -s, --sleep    amount of time to sleep between traversals [nargs=0..1] [default: 1]
       -e, --edges    number of edges in the graph [nargs=0..1] [default: 1000]
 
 
