@@ -32,10 +32,10 @@ int main(int argc, char** argv) {
         .default_value(DEFAULT_SLEEP_TIME)
         .scan<'g', float>();
 
-    // edges != total number of unique edges in all cases where uniqueness is defined by
-    // vertices this is because we allow multiple edges between two vertices
-    // (though they aren't rendered differently) we don't allow self-edges
-    // though.
+    // edges != total number of unique edges in all cases where uniqueness is
+    // defined by vertices this is because we allow multiple edges between two
+    // vertices (though they aren't rendered differently) we don't allow
+    // self-edges though.
 
     program.add_argument("--edges", "-e")
         .help("number of edges in the graph")
@@ -54,23 +54,22 @@ int main(int argc, char** argv) {
     std::size_t edgeCount = program.get<std::size_t>("--edges");
     float sleepTime = program.get<float>("--sleep");
 
-    if(sleepTime < 0) {
+    if (sleepTime < 0) {
         std::cout << "Sleep time must be >= 0." << std::endl;
         return -1;
     }
-    if(vertexCount == 0) {
+    if (vertexCount == 0) {
         std::cout << "Vertex count must be >= 1" << std::endl;
         return -1;
     }
-    if(edgeCount == 0) {
+    if (edgeCount == 0) {
         std::cout << "Edge count must be >= 1" << std::endl;
         return -1;
     }
-    if(edgeCount > 0 && vertexCount <= 1) {
+    if (edgeCount > 0 && vertexCount <= 1) {
         std::cout << "Not enough vertices to create any edges." << std::endl;
         return -1;
     }
-
 
     SetTraceLogLevel(LOG_ERROR);
 
