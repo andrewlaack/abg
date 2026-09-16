@@ -7,7 +7,7 @@ Vertex::Vertex(Vector2 position, float drawSize)
 
 
 std::string Vertex::toString() {
-    std::string result = "(" + std::to_string(this->position.x) + ", " + std::to_string(this->position.y) + ")";
+    std::string result = "(x: " + std::to_string(this->position.x) + ", y: " + std::to_string(this->position.y) + ", visited: "+ std::to_string(this->visited) + ")";
     return result;
 }
 

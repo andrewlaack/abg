@@ -1,0 +1,2 @@
+edges: {(v1: 1, v2: 0, traversed: 1)(v1: 1, v2: 0, traversed: 1)}
+vertices: {(x: 1606.000000, y: 420.000000, visited: 1)(x: 3121.000000, y: 1161.000000, visited: 1)}
