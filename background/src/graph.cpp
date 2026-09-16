@@ -1,13 +1,11 @@
 #include "../headers/graph.hpp"
+#include "../headers/constants.hpp"
 #include "../headers/vertex.hpp"
 #include "../headers/utils.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <raylib.h>
 #include <stdexcept>
-
-#define VERTEX_SIZE 5
-#define EDGE_SIZE 1
 
 Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax, uint32_t yMax) {
 
@@ -21,7 +19,7 @@ Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax, uint32
 
     for(std::size_t i = 0; i < vertCount; ++i) {
         Vector2 rnd = randomPosition(xMax, yMax);
-        Vertex v {rnd,VERTEX_SIZE};
+        Vertex v {rnd,VERTEX_RENDER_SIZE};
         this->vertices.push_back(v);
     }
     for(std::size_t i = 0; i < edgeCount; ++i) {
@@ -78,7 +76,7 @@ void Graph::render() noexcept {
             if(edge.traversed) {
                 visited.push_back(edge);
             } else {
-                DrawLineEx(v1, v2, EDGE_SIZE,DARKERGRAY);
+                DrawLineEx(v1, v2, EDGE_REDNER_SIZE,DARKERGRAY);
             }
         }
     }
@@ -93,7 +91,7 @@ void Graph::render() noexcept {
         std::size_t idx2 = edge.v2Index;
         auto v1 = vertices[idx1].position;
         auto v2 = vertices[idx2].position;
-        DrawLineEx(v1, v2, EDGE_SIZE, WHITE);
+        DrawLineEx(v1, v2, EDGE_REDNER_SIZE, WHITE);
     }
 }
 
