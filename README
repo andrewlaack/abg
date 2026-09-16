@@ -1,3 +1,23 @@
-Visualizations
-==============
-These are an assortment of programmatic visualizations I've created.
+abg - animated background
+=========================
+
+
+dependencies
+============
+X11, raylib, g++
+
+
+usage
+=====
+    Usage: abg [--help] [--version] [--vertices VAR] [--edges VAR]
+
+    Optional arguments:
+      -h, --help     shows help message and exits
+      -v, --version  prints version information and exits
+      --vertices     number of vertices in the graph [nargs=0..1] [default: 200]
+      -e, --edges    number of edges in the graph [nargs=0..1] [default: 1000]
+
+examples
+========
+    abg --edges 50 --vertices 10
+    abg --edges 1500 --vertices 1000
