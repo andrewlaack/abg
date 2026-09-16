@@ -7,11 +7,6 @@
 #include <X11/Xatom.h>
 #include <unistd.h>
 
-void setBackground(std::string filePath) {
-    std::string command = "/usr/bin/feh --no-fehbg --bg-scale " + filePath;
-    system(command.c_str());
-}
-
 std::vector<uint32_t> getScreenSize() {
     Display* dpy;
     Screen* screen;
