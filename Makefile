@@ -2,10 +2,8 @@ include config.mk
 
 # building actual program
 
-
 debug-build:
 	${DCOMMAND_P} src/main.cpp ${DCOMMAND_S} -o abg.out
-
 
 release-build:
 	${COMMAND_P} src/main.cpp ${COMMAND_S} -o abg.out
