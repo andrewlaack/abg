@@ -1,13 +1,14 @@
 abg - animated background
 =========================
+A program that executes Prim's algorithm, rendering each step using raylib, set as an X11 background.
 
 
-dependencies
+Requirements
 ============
-X11, raylib, g++
+X11, raylib, g++, make
 
 
-usage
+Usage
 =====
     Usage: abg [--help] [--version] [--vertices VAR] [--edges VAR]
 
@@ -17,7 +18,8 @@ usage
       --vertices     number of vertices in the graph [nargs=0..1] [default: 200]
       -e, --edges    number of edges in the graph [nargs=0..1] [default: 1000]
 
-examples
+
+Examples
 ========
     abg --edges 50 --vertices 10
     abg --edges 1500 --vertices 1000
