@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 
     srand(clock());
     // reverse semver
-    argparse::ArgumentParser program("background", "10.0.0");
+    argparse::ArgumentParser program("abg", "10.0.0");
 
     program.add_argument("--vertices")
         .help("number of vertices in the graph")
@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
     // would be nice to do this all in background.cpp, but raylib and x11 can't both be imported 
     // by the same file because of some dependency chain thing with Font.
 
-    InitWindow(xMax, yMax, "background-ray");
-    sendToBg("background-ray");
+    InitWindow(xMax, yMax, "abg");
+    sendToBg("abg");
 
     int count = 0;
     while (!WindowShouldClose()) {

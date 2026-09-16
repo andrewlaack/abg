@@ -1,5 +1,5 @@
-background
-==========
+abg - animated background
+=========================
 
 
 dependencies
@@ -9,7 +9,7 @@ X11, raylib, g++
 
 usage
 =====
-    Usage: background [--help] [--version] [--vertices VAR] [--edges VAR]
+    Usage: abg [--help] [--version] [--vertices VAR] [--edges VAR]
 
     Optional arguments:
       -h, --help     shows help message and exits
@@ -19,5 +19,5 @@ usage
 
 examples
 ========
-    background --edges 50 --vertices 10
-    background --edges 1500 --vertices 1000
+    abg --edges 50 --vertices 10
+    abg --edges 1500 --vertices 1000
