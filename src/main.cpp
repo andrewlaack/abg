@@ -3,7 +3,6 @@
 #include "../include/graph.hpp"
 #include "../include/prim.hpp"
 #include "../vendor/argparse.hpp"
-#include <cstddef>
 #include <cstdint>
 #include <cstdlib>
 #include <ctime>
