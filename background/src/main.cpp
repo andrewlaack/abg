@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
+#include <iostream>
 #include <unistd.h>
 #include <raylib.h>
 #include <ctime>
@@ -23,6 +24,12 @@ int main(int argc, char** argv) {
         .default_value(DEFAULT_VERTEX_COUNT)
         .scan<'i', std::size_t>();
 
+    program.add_argument("--sleep", "-s")
+        .help("amount of time to sleep between traversals")
+        .default_value(DEFAULT_SLEEP_TIME)
+        .scan<'g', float>();
+
+
     program.add_argument("--edges", "-e")
         .help("number of edges in the graph")
         .default_value(DEFAULT_EDGE_COUNT)
@@ -39,6 +46,7 @@ int main(int argc, char** argv) {
 
     std::size_t vertexCount = program.get<std::size_t>("--vertices");
     std::size_t edgeCount = program.get<std::size_t>("--edges");
+    float sleepTime = program.get<float>("--sleep");
 
     SetTraceLogLevel(LOG_ERROR);
 
@@ -72,7 +80,7 @@ int main(int argc, char** argv) {
             ClearBackground(BLACK);
             g.render();
             EndDrawing(); 
-            sleep(1);
+            usleep((int)sleepTime * 1000000);
             oneStepPrim(toVisit, visitedIndices, g);
         }
     }

@@ -1,9 +1,9 @@
 build:
-	g++ -Ofast src/main.cpp src/prim.cpp src/graph.cpp src/edge.cpp src/utils.cpp src/vertex.cpp src/background.cpp -lraylib  -lX11 -o background
+	g++ -Ofast src/main.cpp src/prim.cpp src/graph.cpp src/edge.cpp src/utils.cpp src/vertex.cpp src/background.cpp -lraylib  -lX11 -o background.out
 install: build
-	cp background /usr/local/bin
+	cp background.out /usr/local/bin/background
 clean:
-	rm background
+	rm background.out
 test:
 	g++ tests/graph_test.cpp src/prim.cpp src/graph.cpp src/edge.cpp src/utils.cpp src/vertex.cpp src/background.cpp -lCatch2Main -lCatch2 -lraylib -lX11 -o graph_tests
 	./graph_tests
