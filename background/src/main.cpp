@@ -30,6 +30,10 @@ int main(int argc, char** argv) {
         .scan<'g', float>();
 
 
+    // edges != total number of unique edges where uniqueness is defined by vertices
+    // this is because we allow multiple edges between two vertices (though they aren't rendered differently)
+    // we don't allow self-edges though. 
+
     program.add_argument("--edges", "-e")
         .help("number of edges in the graph")
         .default_value(DEFAULT_EDGE_COUNT)
