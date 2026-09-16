@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
             ClearBackground(BLACK);
             g.render();
             EndDrawing(); 
-            usleep((int)sleepTime * 1000000);
+            usleep((int)(sleepTime * 1000000));
             oneStepPrim(toVisit, visitedIndices, g);
         }
     }
