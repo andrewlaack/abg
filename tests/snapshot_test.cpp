@@ -12,7 +12,6 @@ std::string readFileToString(std::string filename) {
         return sstr.str();
 }
 
-
 TEST_CASE( "Basic graph serialization snapshot", "[basic graph serialization snapshot]" ) {
     Graph g = basicGraphSerialization();
     REQUIRE(readFileToString("basicGraph") == g.toString());
@@ -20,4 +19,10 @@ TEST_CASE( "Basic graph serialization snapshot", "[basic graph serialization sna
 
 TEST_CASE( "Traversed graph serialization snapshot", "[traversed graph serialization snapshot]" ) {
     Graph g = fullTraversalSerialization();
+    REQUIRE(readFileToString("traversedGraph") == g.toString());
+}
+
+TEST_CASE( "Traversed graph serialization snapshot larger", "[traversed graph serialization snapshot larger]" ) {
+    Graph g = fullTraversalLargerSerialization();
+    REQUIRE(readFileToString("traversedLargerGraph") == g.toString());
 }
