@@ -14,9 +14,13 @@
 #include "../include/prim.hpp"
 #include "../vendor/argparse.hpp"
 
-int main(int argc, char** argv) {
-    srand(clock());
+#ifdef NDEBUG
+#define DEBUG true
+#else
+#define DEBUG false
+#endif
 
+int main(int argc, char** argv) {
     // reverse semver
     // software does get completed at some point, and for me that's at 1.0.0.
 
@@ -83,7 +87,6 @@ int main(int argc, char** argv) {
     // with Font.
 
     InitWindow(xMax, yMax, "abg");
-
     sendToBg("abg");
 
     while (!WindowShouldClose()) {
@@ -98,10 +101,24 @@ int main(int argc, char** argv) {
         g.traverseVertexIdx(0);
         visitedIndices.insert(0);
 
+        RenderTexture2D blankGraph = LoadRenderTexture(xMax, yMax);
+        BeginTextureMode(blankGraph);
+        ClearBackground(BLACK);
+        g.render();
+        EndTextureMode();
+
         while (!WindowShouldClose() && toVisit.size() != 0) {
+            BeginTextureMode(blankGraph);
+            g.renderUnrenderedTraversed();
+            EndTextureMode();
+
             BeginDrawing();
-            ClearBackground(BLACK);
-            g.render();
+
+            // RLAPI void DrawTexture(Texture2D texture, int posX, int posY,
+            // Color tint);                               // Draw a Texture2D
+
+            DrawTexture(blankGraph.texture, 0, 0, WHITE);
+
             EndDrawing();
 
             // since we wait sleepTime here, the bg render has a render delta of

@@ -75,6 +75,24 @@ std::string Graph::toString() noexcept {
     return result;
 }
 
+// only render newly traversed edges / nodes.
+void Graph::renderUnrenderedTraversed() noexcept {
+    for (auto* edgesT : edgesToRender) {
+        auto& edge = *edgesT;
+        std::size_t idx1 = edge.v1Index;
+        std::size_t idx2 = edge.v2Index;
+        auto v1 = vertices[idx1].position;
+        auto v2 = vertices[idx2].position;
+        DrawLineEx(v1, v2, EDGE_REDNER_SIZE, WHITE);
+    }
+    edgesToRender = {};
+
+    for (auto* vertex : verticesToRender) {
+        vertex->render();
+    }
+    verticesToRender = {};
+}
+
 void Graph::render() noexcept {
     std::vector<Edge> visited{};
     for (auto& edgesT : this->edges) {
@@ -115,6 +133,7 @@ void Graph::render() noexcept {
 
 void Graph::traverseVertexIdx(std::size_t idx) {
     this->vertices[idx].visited = true;
+    verticesToRender.push_back(&vertices[idx]);
 }
 
 // we assume the current vertex is already marked as traversed so we check to
@@ -154,6 +173,7 @@ void Graph::setEdgeTraversed(Edge e) {
     for (auto& edge : oEdges) {
         if (edge.v2Index == source || edge.v1Index == source) {
             edge.traversed = true;
+            edgesToRender.push_back(&edge);
         }
     }
 }

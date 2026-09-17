@@ -1,6 +1,5 @@
 #include "../include/prim.hpp"
 
-#include <raylib.h>
 #include <unistd.h>
 
 #include <cstdlib>
