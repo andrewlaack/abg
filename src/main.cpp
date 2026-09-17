@@ -88,7 +88,6 @@ int main(int argc, char** argv) {
 
     InitWindow(xMax, yMax, "abg");
     sendToBg("abg");
-
     while (!WindowShouldClose()) {
         Graph g = Graph(edgeCount, vertexCount, xMax, yMax);
         std::vector<double> minEdgeToVertex(vertexCount, -1);
@@ -129,6 +128,9 @@ int main(int argc, char** argv) {
 
             oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
         }
+
         UnloadRenderTexture(blankGraph);
     }
+
+    CloseWindow();
 }
