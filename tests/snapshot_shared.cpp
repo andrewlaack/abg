@@ -6,24 +6,22 @@
 #include "../include/prim.hpp"
 
 Graph basicGraphSerialization() {
-    srand(42);
     int vertCount = 10;
     int edgeCount = 10;
     float xMax = 10;
     float yMax = 10;
-    auto g = Graph(edgeCount, vertCount, xMax, yMax);
+    auto g = Graph(edgeCount, vertCount, xMax, yMax, 42);
     return g;
 }
 
 Graph fullTraversalSerialization() {
-    srand(42);
     std::size_t edgeCount = 1;
     std::size_t vertCount = 2;
 
     float xMax = 5120;
     float yMax = 1440;
 
-    Graph g = Graph(edgeCount, vertCount, xMax, yMax);
+    Graph g = Graph(edgeCount, vertCount, xMax, yMax, 52);
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
     std::vector<Edge> edges = g.getEdgesOfVertexIdx(0);
@@ -43,14 +41,13 @@ Graph fullTraversalSerialization() {
 }
 
 Graph fullTraversalLargerSerialization() {
-    srand(42);
     std::size_t edgeCount = 25;
     std::size_t vertCount = 15;
 
     float xMax = 5120;
     float yMax = 1440;
 
-    Graph g = Graph(edgeCount, vertCount, xMax, yMax);
+    Graph g = Graph(edgeCount, vertCount, xMax, yMax, 61);
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
     std::vector<Edge> edges = g.getEdgesOfVertexIdx(0);

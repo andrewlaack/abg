@@ -15,19 +15,22 @@ void explore(
     Edge& current, Graph& g, std::unordered_set<std::size_t>& visitedIndices) {
     visitedIndices.insert(cIdx);
     g.traverseVertexIdx(cIdx);
-
-    g.setEdgeTraversed(current);
-
-    std::vector<Edge> edges = g.getEdgesOfVertexIdx(cIdx);
-    for (auto edge : edges) {
-        toVisit.push(edge);
+    g.setEdgeTraversed(
+        current);  // this must happen before the next line below.
+    std::vector<Edge>* edges = g.getEdgesWithUnvisitedVertices(
+        cIdx);  // this gets edges with two unvisited vertices connected to
+                // cIdx.
+    for (auto& edge : *edges) {
+        toVisit.push(std::move(edge));
     }
+    delete edges;
 }
 
 void oneStepPrim(
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>>& toVisit,
     std::unordered_set<std::size_t>& visitedIndices, Graph& g) {
     bool found = false;
+
     if (toVisit.size() == 0) {
         return;
     }

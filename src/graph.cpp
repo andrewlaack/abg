@@ -5,14 +5,13 @@
 #include <cstddef>
 #include <cstdint>
 #include <stdexcept>
-#include <unordered_map>
 
 #include "../include/constants.hpp"
 #include "../include/utils.hpp"
 #include "../include/vertex.hpp"
 
 Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax,
-             uint32_t yMax) {
+             uint32_t yMax, std::uint32_t seed) {
     if (edgeCount > 0 && vertCount <= 1) {
         throw std::invalid_argument("This graph does not support self-loops.");
     }
@@ -20,8 +19,17 @@ Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax,
         throw std::invalid_argument("xMax and yMax must be > 0.");
     }
 
+    std::mt19937 rng{seed};
+    std::uniform_int_distribution<std::size_t> pick1(0, vertCount - 1);
+
+    std::uniform_int_distribution<std::uint32_t> pick2(0, xMax - 1);
+    std::uniform_int_distribution<std::uint32_t> pick3(0, yMax - 1);
+
+    vertices.reserve(vertCount);
+    edges.resize(vertCount);
+
     for (std::size_t i = 0; i < vertCount; ++i) {
-        Vector2 rnd = randomPosition(xMax, yMax);
+        Vector2 rnd = Vector2{(float)pick2(rng), (float)pick3(rng)};
         Vertex v{rnd, VERTEX_RENDER_SIZE};
         this->vertices.push_back(v);
     }
@@ -30,25 +38,27 @@ Graph::Graph(std::size_t edgeCount, std::size_t vertCount, uint32_t xMax,
         std::size_t idx2 = 0;
         // no self-edges
         while (idx1 == idx2) {
-            idx1 = std::rand() % vertCount;
-            idx2 = std::rand() % vertCount;
+            idx1 = pick1(rng);
+            idx2 = pick1(rng);
         }
 
-        Edge e{
-            idx1, idx2,
-            distanceSquared(vertices[idx1].position, vertices[idx2].position),
-            i};
-        this->edges[idx1].push_back(e);
-        this->edges[idx2].push_back(e);
+        double distance =
+            distanceSquared(vertices[idx1].position, vertices[idx2].position);
+
+        // this maintains the invariant that the first vertex of the edge is the
+        // current one.
+        Edge e1{idx1, idx2, distance, i};
+        Edge e2{idx2, idx1, distance, i};
+        this->edges[idx1].push_back(e1);
+        this->edges[idx2].push_back(e2);
     }
 }
 
 std::string Graph::toString() noexcept {
     std::string result = "edges: {";
 
-    for (auto pair : this->edges) {
-        auto key = pair.first;
-        for (auto edge : edges[key]) {
+    for (auto edgesV : this->edges) {
+        for (auto edge : edgesV) {
             result += edge.toString();
         }
     }
@@ -66,14 +76,13 @@ std::string Graph::toString() noexcept {
 }
 
 void Graph::render() noexcept {
-    // yes, this will double draw because we track 0 -> 1 and 1 -> 0
-    // this is faster than tracking which have and haven't been rendered though
-    // with a to_string + unordered set.
-
     std::vector<Edge> visited{};
-    for (auto pair : this->edges) {
-        auto edges = this->edges[pair.first];
-        for (auto edge : edges) {
+    for (auto& edgesT : this->edges) {
+        for (auto& edge : edgesT) {
+            if (edge.v1Index < edge.v2Index) {
+                continue;  // since edges are tracked twice with v1
+                           // it's safe to skip one of them.
+            }
             std::size_t idx1 = edge.v1Index;
             std::size_t idx2 = edge.v2Index;
             auto v1 = vertices[idx1].position;
@@ -86,12 +95,16 @@ void Graph::render() noexcept {
         }
     }
 
-    for (auto vertex : this->vertices) {
+    for (auto& vertex : this->vertices) {
         vertex.render();
     }
 
     // ensure we draw visited over unvisited for better looks
-    for (auto edge : visited) {
+    for (auto& edge : visited) {
+        if (edge.v1Index < edge.v2Index) {
+            continue;  // since edges are tracked twice with v1
+                       // it's safe to skip one of them.
+        }
         std::size_t idx1 = edge.v1Index;
         std::size_t idx2 = edge.v2Index;
         auto v1 = vertices[idx1].position;
@@ -102,6 +115,18 @@ void Graph::render() noexcept {
 
 void Graph::traverseVertexIdx(std::size_t idx) {
     this->vertices[idx].visited = true;
+}
+
+// we assume the current vertex is already marked as traversed so we check to
+// see if the other is here.
+std::vector<Edge>* Graph::getEdgesWithUnvisitedVertices(std::size_t idx) {
+    std::vector<Edge>* result = new std::vector<Edge>{};
+    for (auto edge : edges[idx]) {
+        if (!vertices[edge.v2Index].visited && !edge.traversed) {
+            result->push_back(edge);
+        }
+    }
+    return result;
 }
 
 std::vector<Edge> Graph::getEdgesOfVertexIdx(std::size_t idx) {

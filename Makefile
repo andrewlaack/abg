@@ -5,8 +5,11 @@ include config.mk
 debug-build:
 	${DCOMMAND_P} src/main.cpp ${DCOMMAND_S} -o abg.out
 
-release-build:
+build:
 	${COMMAND_P} src/main.cpp ${COMMAND_S} -o abg.out
+
+release-build: build
+
 man:
 	mkdir -p ${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < abg.1 > ${DESTDIR}${MANPREFIX}/man1/abg.1
