@@ -134,5 +134,6 @@ int main(int argc, char** argv) {
 
             oneStepPrim(toVisit, visitedIndices, g);
         }
+        UnloadRenderTexture(blankGraph);
     }
 }

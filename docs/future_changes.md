@@ -9,4 +9,3 @@ Some I am considering adding:
     - this would likely require changes to the graph generation to increase the likelihood of shorter edges
 - A* algorithm from the two farthest vertices
     - this would likely require changes to the graph generation to increase the likelihood of shorter edges
-
