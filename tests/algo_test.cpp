@@ -14,6 +14,7 @@ TEST_CASE("Small Prim algorithm", "[small prim algo]") {
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
     std::vector<Edge> edges = g.getEdgesOfVertexIdx(0);
+    std::vector<double> minEdgeToVertex(vertCount, -1);
 
     for (auto edge : edges) {
         toVisit.push(edge);
@@ -23,7 +24,7 @@ TEST_CASE("Small Prim algorithm", "[small prim algo]") {
     visitedIndices.insert(0);
 
     while (toVisit.size() != 0) {
-        oneStepPrim(toVisit, visitedIndices, g);
+        oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
     }
     // this will be true bc 2 vertices 1 edge...
     // our graph may have multi-edges.
@@ -65,6 +66,7 @@ TEST_CASE("Large Prim algorithm", "[Large prim algo]") {
     Graph g = Graph(edgeCount, vertCount, xMax, yMax);
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
+    std::vector<double> minEdgeToVertex(vertCount, -1);
 
     do {
         g = Graph(edgeCount, vertCount, xMax, yMax);
@@ -80,7 +82,7 @@ TEST_CASE("Large Prim algorithm", "[Large prim algo]") {
     }
 
     while (toVisit.size() != 0) {
-        oneStepPrim(toVisit, visitedIndices, g);
+        oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
     }
 
     REQUIRE(visitedIndices.size() == vertCount);
@@ -96,6 +98,7 @@ TEST_CASE("Medium Prim algorithm", "[Medium prim algo]") {
     Graph g = Graph(edgeCount, vertCount, xMax, yMax);
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
+    std::vector<double> minEdgeToVertex(vertCount, -1);
 
     do {
         g = Graph(edgeCount, vertCount, xMax, yMax);
@@ -111,7 +114,7 @@ TEST_CASE("Medium Prim algorithm", "[Medium prim algo]") {
     }
 
     while (toVisit.size() != 0) {
-        oneStepPrim(toVisit, visitedIndices, g);
+        oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
     }
 
     REQUIRE(visitedIndices.size() == vertCount);
@@ -126,6 +129,7 @@ TEST_CASE("Staircase Prim algorithm", "[Staircase prim algo]") {
             float xMax = 5120;
             float yMax = 1440;
 
+            std::vector<double> minEdgeToVertex(vertCount, -1);
             Graph g = Graph(edgeCount, vertCount, xMax, yMax);
             std::unordered_set<std::size_t> visitedIndices{};
             std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>>
@@ -143,7 +147,7 @@ TEST_CASE("Staircase Prim algorithm", "[Staircase prim algo]") {
             visitedIndices.insert(0);
 
             while (toVisit.size() != 0) {
-                oneStepPrim(toVisit, visitedIndices, g);
+                oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
             }
 
             REQUIRE(visitedIndices.size() == vertCount);
@@ -177,6 +181,7 @@ TEST_CASE("Small Prim Test", "[Small full validation]") {
         bool havePrior = false;
         Edge prior = toVisit.top();
         std::unordered_set<std::size_t> visibleAtPrior;
+        std::vector<double> minEdgeToVertex(vertCount, -1);
 
         while (toVisit.size() != 0) {
             auto current = toVisit.top();
@@ -193,7 +198,7 @@ TEST_CASE("Small Prim Test", "[Small full validation]") {
             prior = current;
             visibleAtPrior = visitedIndices;
             havePrior = true;
-            oneStepPrim(toVisit, visitedIndices, g);
+            oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
             bool valid = vBefore.size() + 1 == visitedIndices.size() ||
                          vBefore.size() == vertCount;
             REQUIRE(valid);

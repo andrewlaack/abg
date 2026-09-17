@@ -25,6 +25,7 @@ Graph fullTraversalSerialization() {
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
     std::vector<Edge> edges = g.getEdgesOfVertexIdx(0);
+    std::vector<double> minEdgeToVertex(vertCount, -1);
 
     for (auto edge : edges) {
         toVisit.push(edge);
@@ -34,7 +35,7 @@ Graph fullTraversalSerialization() {
     visitedIndices.insert(0);
 
     while (toVisit.size() != 0) {
-        oneStepPrim(toVisit, visitedIndices, g);
+        oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
     }
 
     return g;
@@ -51,6 +52,7 @@ Graph fullTraversalLargerSerialization() {
     std::unordered_set<std::size_t> visitedIndices{};
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> toVisit{};
     std::vector<Edge> edges = g.getEdgesOfVertexIdx(0);
+    std::vector<double> minEdgeToVertex(vertCount, -1);
 
     for (auto edge : edges) {
         toVisit.push(edge);
@@ -60,7 +62,7 @@ Graph fullTraversalLargerSerialization() {
     visitedIndices.insert(0);
 
     while (toVisit.size() != 0) {
-        oneStepPrim(toVisit, visitedIndices, g);
+        oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
     }
 
     return g;

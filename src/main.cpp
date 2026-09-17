@@ -91,13 +91,17 @@ int main(int argc, char** argv) {
 
     while (!WindowShouldClose()) {
         Graph g = Graph(edgeCount, vertexCount, xMax, yMax);
+        std::vector<double> minEdgeToVertex(vertexCount, -1);
+
         std::unordered_set<std::size_t> visitedIndices{};
         std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>>
             toVisit{};
         std::vector<Edge> edges = g.getEdgesOfVertexIdx(0);
+
         for (auto edge : edges) {
             toVisit.push(edge);
         }
+
         g.traverseVertexIdx(0);
         visitedIndices.insert(0);
 
@@ -123,7 +127,7 @@ int main(int argc, char** argv) {
 
             usleep((int)(sleepTime * 1000000));
 
-            oneStepPrim(toVisit, visitedIndices, g);
+            oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
         }
         UnloadRenderTexture(blankGraph);
     }
