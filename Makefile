@@ -44,5 +44,9 @@ algo-test:
 	${TCOMMAND_P} tests/algo_test.cpp ${TCOMMAND_S} -o algo_tests.out
 	./algo_tests.out
 	rm algo_tests.out
+crash-test:
+	${TCOMMAND_P} tests/crash_test.cpp ${TCOMMAND_S} -o crash_test.out
+	./crash_test.out
+	rm crash_test.out
 
-test: format snapshot-test graph-test algo-test
+test: format snapshot-test graph-test algo-test crash-test

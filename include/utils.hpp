@@ -2,5 +2,5 @@
 
 #include <raylib.h>
 
-float square(float x);
-float distanceSquared(Vector2 v1, Vector2 v2);
+double square(double x);
+double distanceSquared(Vector2 v1, Vector2 v2);
