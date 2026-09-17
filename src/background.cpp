@@ -19,6 +19,7 @@ std::vector<uint32_t> getScreenSize() {
     screen = ScreenOfDisplay(dpy, 0);
     std::vector<uint32_t> res{(uint32_t)screen->width,
                               (uint32_t)screen->height};
+    XCloseDisplay(dpy);
     return res;
 }
 
