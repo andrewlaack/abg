@@ -121,15 +121,6 @@ int main(int argc, char** argv) {
 
             EndDrawing();
 
-            // since we wait sleepTime here, the bg render has a render delta of
-            // at minimum sleepTime when switching tags in dwm, this is rather
-            // annoying because the screen doesn't repaint until the sleep time
-            // passes, which results in artifacts on screen.
-
-            // despite this, calling render a lot of times is rather intensive
-            // (at least on my hardware) and so this tradeoff is accepted for
-            // now, unless there's a simple approach that allows for preemption
-
             usleep((int)(sleepTime * 1000000));
 
             oneStepPrim(toVisit, visitedIndices, g);
