@@ -110,12 +110,7 @@ int main(int argc, char** argv) {
             EndTextureMode();
 
             BeginDrawing();
-
-            // RLAPI void DrawTexture(Texture2D texture, int posX, int posY,
-            // Color tint);                               // Draw a Texture2D
-
             DrawTexture(blankGraph.texture, 0, 0, WHITE);
-
             EndDrawing();
 
             usleep((int)(sleepTime * 1000000));
