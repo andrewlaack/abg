@@ -14,12 +14,6 @@
 #include "../include/prim.hpp"
 #include "../vendor/argparse.hpp"
 
-#ifdef NDEBUG
-#define DEBUG false
-#else
-#define DEBUG true
-#endif
-
 int main(int argc, char** argv) {
     // reverse semver
     // software does get completed at some point, and for me that's at 1.0.0.
