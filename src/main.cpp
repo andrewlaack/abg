@@ -15,9 +15,9 @@
 #include "../vendor/argparse.hpp"
 
 #ifdef NDEBUG
-#define DEBUG true
-#else
 #define DEBUG false
+#else
+#define DEBUG true
 #endif
 
 int main(int argc, char** argv) {
