@@ -1,11 +1,23 @@
 abg - animated background
 =========================
-A program that executes Prim's algorithm, rendering each step using raylib, set as an X11 background.
+A program that executes Prim's algorithm, rendering each step using raylib, set
+as an X11 background.
 
 
 Requirements
 ============
-X11, raylib, g++, make
+C++ compiler, X11, raylib, make
+
+
+Installation
+============
+Edit config.mk to match your local setup if necessary for building (abg will be
+installed into /usr/local/bin by default).
+
+Then run the following command to build and install abg:
+    make install
+
+(the above command may require root, depending on the installation location)
 
 
 Usage
@@ -15,12 +27,17 @@ Usage
     Optional arguments:
       -h, --help     shows help message and exits
       -v, --version  prints version information and exits
-      --vertices     number of vertices in the graph [nargs=0..1] [default: 200]
-      -s, --sleep    amount of time to sleep between traversals [nargs=0..1] [default: 1]
-      -e, --edges    number of edges in the graph [nargs=0..1] [default: 1000]
+      --vertices     number of vertices in the graph
+      -s, --sleep    amount of time to sleep between traversals
+      -e, --edges    number of edges in the graph
 
 
 Examples
 ========
     abg --edges 50 --vertices 10
     abg --edges 1500 --vertices 1000
+
+
+Configuration
+=============
+The configuration of abg is done via modifying the source code.

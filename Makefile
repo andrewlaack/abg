@@ -12,10 +12,10 @@ release-build: build
 
 man:
 	mkdir -p ${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < docs/abg.1 > ${DESTDIR}${MANPREFIX}/man1/abg.1
-	chmod 644 ${DESTDIR}${MANPREFIX}/man1/abg.1
+	sed "s/VERSION/${VERSION}/g" < docs/abg.1 > ${MANPREFIX}/man1/abg.1
+	chmod 644 ${MANPREFIX}/man1/abg.1
 install: release-build man
-	cp abg.out /usr/local/bin/abg
+	cp abg.out ${PREFIX}/bin/abg
 clean:
 	rm *.out
 
