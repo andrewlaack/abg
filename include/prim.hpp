@@ -11,6 +11,6 @@ void explore(
     std::size_t cIdx,
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> &toVisit,
     Edge &current, Graph &g, std::vector<double>& minVertWeight);
-void oneStepPrim(
+double oneStepPrim(
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> &toVisit,
     std::unordered_set<std::size_t> &visitedIndices, Graph &g, std::vector<double>& minVertWeight);

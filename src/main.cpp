@@ -114,7 +114,8 @@ int main(int argc, char** argv) {
             EndDrawing();
             usleep((int)(sleepTime * 1000000));
 
-            oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
+            // onestep prim returns the cost of the edge we chose.
+            double _ = oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);
         }
 
         UnloadRenderTexture(blankGraph);

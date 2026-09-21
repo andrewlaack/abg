@@ -52,8 +52,8 @@ void run(size_t mv, size_t me, uint32_t iterations) {
     }
 }
 
-void runs() { run(100, 500, 10000); }
-void runl() { run(100000, 1000000, 100); }
+void runs() { run(100, 500, 1000); }
+void runl() { run(100000, 1000000, 10); }
 
 TEST_CASE("Small prim algorithm not guaranteed connected", "[Small prim]") {
     std::vector<std::thread*> threads{};

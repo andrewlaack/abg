@@ -30,18 +30,18 @@ void explore(
     delete edges;
 }
 
-void oneStepPrim(
+double oneStepPrim(
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>>& toVisit,
     std::unordered_set<std::size_t>& visitedIndices, Graph& g,
     std::vector<double>& minVertWeight) {
     bool found = false;
 
     if (toVisit.size() == 0) {
-        return;
+        return 0;
     }
     while (found == false) {
         if (toVisit.size() == 0) {
-            return;
+            return 0;
         }
 
         found = true;
@@ -51,13 +51,16 @@ void oneStepPrim(
         if (visitedIndices.find(current.v2Index) == visitedIndices.end()) {
             auto cIdx = current.v2Index;
             explore(cIdx, toVisit, current, g, visitedIndices, minVertWeight);
+            return current.length2;
 
         } else if (visitedIndices.find(current.v1Index) ==
                    visitedIndices.end()) {
             auto cIdx = current.v1Index;
             explore(cIdx, toVisit, current, g, visitedIndices, minVertWeight);
+            return current.length2;
         } else {
             found = false;
         }
     }
+    return 0;
 }
