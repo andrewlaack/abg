@@ -6,7 +6,7 @@ as an X11 background.
 
 Requirements
 ============
-C++ compiler, X11, raylib, make
+C++ compiler, X11, raylib, make, xrandr
 
 
 Installation

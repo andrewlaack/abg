@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
 
     SetTraceLogLevel(LOG_ERROR);
 
-    auto ss = getScreenSize();
+    auto ss = getScreenSizeAndOffsets();
 
     uint32_t xMax = ss[0];
     uint32_t yMax = ss[1];
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
     // with Font.
 
     InitWindow(xMax, yMax, "abg");
-    sendToBg("abg");
+    sendToBg("abg", ss[2], ss[3]);
     while (!WindowShouldClose()) {
         Graph g = Graph(edgeCount, vertexCount, xMax, yMax);
         std::vector<double> minEdgeToVertex(vertexCount, -1);
@@ -112,7 +112,6 @@ int main(int argc, char** argv) {
             BeginDrawing();
             DrawTexture(blankGraph.texture, 0, 0, WHITE);
             EndDrawing();
-
             usleep((int)(sleepTime * 1000000));
 
             oneStepPrim(toVisit, visitedIndices, g, minEdgeToVertex);

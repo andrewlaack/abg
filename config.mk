@@ -5,7 +5,7 @@ PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
 # linking
-LIBS = -lraylib -lX11
+LIBS = -lraylib -lX11 -lXrandr
 TLIBS = -lCatch2Main -lCatch2 ${LIBS}
 
 # compiler
