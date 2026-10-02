@@ -1,12 +1,10 @@
 include config.mk
 
-# building actual program
+build:
+	${COMMAND_P} src/main.cpp ${COMMAND_S} -o abg.out
 
 debug-build:
 	${DCOMMAND_P} src/main.cpp ${DCOMMAND_S} -o abg.out
-
-build:
-	${COMMAND_P} src/main.cpp ${COMMAND_S} -o abg.out
 
 release-build: build
 
@@ -36,17 +34,22 @@ snapshot-test:
 	${TCOMMAND_P} tests/snapshot_test.cpp ${TCOMMAND_S} -o snapshot_tests.out
 	./snapshot_tests.out
 	rm snapshot_tests.out
+
 graph-test:
 	${TCOMMAND_P} tests/graph_test.cpp ${TCOMMAND_S} -o graph_tests.out
 	./graph_tests.out
 	rm graph_tests.out
+
 algo-test:
 	${TCOMMAND_P} tests/algo_test.cpp ${TCOMMAND_S} -o algo_tests.out
 	./algo_tests.out
 	rm algo_tests.out
+
 crash-test:
 	${TCOMMAND_P} tests/crash_test.cpp ${TCOMMAND_S} -o crash_test.out
 	./crash_test.out
 	rm crash_test.out
 
 test: format snapshot-test graph-test algo-test crash-test
+
+.PHONY: build debug-build release-build man install clean fmt format snapshot-update test crash-test algo-test graph-test snapshot-test
