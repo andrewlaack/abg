@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
         .default_value(DEFAULT_VERTEX_COUNT)
         .scan<'i', std::size_t>();
 
-    program.add_argument("--sleep", "-s")
+    program.add_argument("-s", "--sleep")
         .help("amount of time to sleep between traversals")
         .default_value(DEFAULT_SLEEP_TIME)
         .scan<'g', float>();
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
     // vertices (though they aren't rendered differently) we don't allow
     // self-edges though.
 
-    program.add_argument("--edges", "-e")
+    program.add_argument("-e", "--edges")
         .help("number of edges in the graph")
         .default_value(DEFAULT_EDGE_COUNT)
         .scan<'i', std::size_t>();
